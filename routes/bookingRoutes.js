@@ -19,19 +19,19 @@ const adminOnly = (req, res, next) => {
   }
 };
 
+// Admin routes (authentication + admin role required)
+// GET /api/bookings/all - Get all bookings (MUST come before /:id)
+router.get('/all', protect, adminOnly, getAllBookings);
+
 // Customer routes (authentication required)
+// GET /api/bookings/my-bookings - Get customer's own bookings (MUST come before /:id)
+router.get('/my-bookings', protect, getMyBookings);
+
 // POST /api/bookings - Create booking
 router.post('/', protect, createBooking);
 
-// GET /api/bookings/my-bookings - Get customer's own bookings
-router.get('/my-bookings', protect, getMyBookings);
-
 // GET /api/bookings/:id - Get booking by ID
 router.get('/:id', protect, getBookingById);
-
-// Admin routes (authentication + admin role required)
-// GET /api/bookings/all - Get all bookings
-router.get('/all', protect, adminOnly, getAllBookings);
 
 // PUT /api/bookings/:id/status - Update booking status
 router.put('/:id/status', protect, adminOnly, updateBookingStatus);
