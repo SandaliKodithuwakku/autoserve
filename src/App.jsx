@@ -9,6 +9,8 @@ import Services from './pages/Services';
 import ServiceDetails from './pages/ServiceDetails';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import ForgotPassword from './pages/ForgotPassword';
+import ResetPassword from './pages/ResetPassword';
 import Contact from './pages/Contact';
 import About from './pages/About';
 import FAQ from './pages/FAQ';
@@ -37,6 +39,8 @@ function App() {
             <Route path="/services/:id" element={<ServiceDetails />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
+            <Route path="/reset-password/:token" element={<ResetPassword />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/about" element={<About />} />
             <Route path="/faq" element={<FAQ />} />
