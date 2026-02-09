@@ -1,11 +1,12 @@
 import api from './config';
 
 // Login user
-export const loginUser = async (username, password) => {
+export const loginUser = async (email, password) => {
   try {
     const response = await api.post('/auth/login', {
-      username,
-      password,
+      email: email,
+      username: email,
+      password: password,
     });
     return response.data;
   } catch (error) {

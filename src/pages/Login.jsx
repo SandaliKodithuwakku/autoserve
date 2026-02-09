@@ -40,7 +40,8 @@ function Login() {
       login(response.token, response.user);
       navigate('/');
     } catch (err) {
-      setError(err.message || 'Login failed. Please check your credentials.');
+      const errorMsg = err.message || err.error || 'Login failed. Please check your credentials.';
+      setError(errorMsg);
     } finally {
       setLoading(false);
     }
@@ -84,11 +85,11 @@ function Login() {
 
           {/* Form */}
           <form onSubmit={handleSubmit} className="space-y-4">
-            {/* Email Address */}
+            {/* Email/Username */}
             <input
-              type="email"
+              type="text"
               name="email"
-              placeholder="Email"
+              placeholder="Email or Username"
               value={formData.email}
               onChange={handleChange}
               className="w-full px-4 py-3 bg-white border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#F97316] focus:border-transparent text-gray-700 placeholder-gray-400 transition-colors"

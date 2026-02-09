@@ -56,9 +56,9 @@ function Register() {
 
     try {
       const response = await registerCustomer(
-        formData.fullName,
-        formData.email,
-        formData.email,
+        formData.email,        // Use email as username
+        formData.email,        // Email
+        formData.fullName,     // Phone (using fullName temporarily)
         formData.password
       );
 
