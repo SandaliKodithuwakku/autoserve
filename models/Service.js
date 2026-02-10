@@ -16,12 +16,20 @@ const serviceSchema = new mongoose.Schema({
     min: 0
   },
   duration: {
-    type: String
+    type: String,
+    required: [true, 'Please add a duration']
   },
-  createdAt: {
-    type: Date,
-    default: Date.now
+  icon: {
+    type: String,
+    default: '🔧'
+  },
+  features: {
+    type: [String],
+    default: []
   }
+},
+  {
+  timestamps: true
 });
 
 module.exports = mongoose.model('Service', serviceSchema);

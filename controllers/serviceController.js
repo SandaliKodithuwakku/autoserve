@@ -3,7 +3,7 @@ const Service = require('../models/Service');
 // Create service (Admin only)
 const createService = async (req, res) => {
   try {
-    const { name, description, price, duration } = req.body;
+    const { name, description, price, duration, icon, features } = req.body;
 
     // Validate required fields
     if (!name || !description || !price) {
@@ -15,7 +15,9 @@ const createService = async (req, res) => {
       name,
       description,
       price,
-      duration
+      duration,
+      icon,
+      features
     });
 
     res.status(201).json({
@@ -65,12 +67,12 @@ const getServiceById = async (req, res) => {
 // Update service (Admin only)
 const updateService = async (req, res) => {
   try {
-    const { name, description, price, duration } = req.body;
+    const { name, description, price, duration, icon, features } = req.body;
 
     // Find and update service
     const service = await Service.findByIdAndUpdate(
       req.params.id,
-      { name, description, price, duration },
+      { name, description, price, duration, icon, features },
       { new: true, runValidators: true }
     );
 
@@ -114,4 +116,3 @@ module.exports = {
   updateService,
   deleteService
 };
-
