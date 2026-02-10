@@ -71,15 +71,25 @@ function Navbar() {
           <div className="hidden md:flex items-center space-x-4 flex-1 justify-end">
             {user ? (
               <>
-                <Link 
-                  to="/profile" 
-                  className="flex items-center space-x-2 text-gray-700 hover:text-[#F97316] transition-colors"
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
-                    <path fillRule="evenodd" d="M18.685 19.097A9.723 9.723 0 0021.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 003.065 7.097A9.716 9.716 0 0012 21.75a9.716 9.716 0 006.685-2.653zm-12.54-1.285A7.486 7.486 0 0112 15a7.486 7.486 0 015.855 2.812A8.224 8.224 0 0112 20.25a8.224 8.224 0 01-5.855-2.438zM15.75 9a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" clipRule="evenodd" />
-                  </svg>
-                  <span className="font-medium text-gray-700">{user.username}</span>
-                </Link>
+                {user.role !== 'admin' && (
+                  <Link 
+                    to="/profile" 
+                    className="flex items-center space-x-2 text-gray-700 hover:text-[#F97316] transition-colors"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
+                      <path fillRule="evenodd" d="M18.685 19.097A9.723 9.723 0 0021.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 003.065 7.097A9.716 9.716 0 0012 21.75a9.716 9.716 0 006.685-2.653zm-12.54-1.285A7.486 7.486 0 0112 15a7.486 7.486 0 015.855 2.812A8.224 8.224 0 0112 20.25a8.224 8.224 0 01-5.855-2.438zM15.75 9a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" clipRule="evenodd" />
+                    </svg>
+                    <span className="font-medium text-gray-700">{user.username}</span>
+                  </Link>
+                )}
+                {user.role === 'admin' && (
+                  <span className="flex items-center space-x-2 text-gray-700">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5 text-[#F97316]">
+                      <path fillRule="evenodd" d="M18.685 19.097A9.723 9.723 0 0021.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 003.065 7.097A9.716 9.716 0 0012 21.75a9.716 9.716 0 006.685-2.653zm-12.54-1.285A7.486 7.486 0 0112 15a7.486 7.486 0 015.855 2.812A8.224 8.224 0 0112 20.25a8.224 8.224 0 01-5.855-2.438zM15.75 9a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" clipRule="evenodd" />
+                    </svg>
+                    <span className="font-medium text-gray-700">Admin</span>
+                  </span>
+                )}
                 <button
                   onClick={handleLogout}
                   className="px-5 py-2 border-2 border-[#F97316] text-[#F97316] rounded-md hover:bg-[#F97316] hover:text-white transition-colors font-medium"
@@ -192,15 +202,17 @@ function Navbar() {
                       Admin Dashboard
                     </Link>
                   )}
-                  <Link 
-                    to="/profile" 
-                    className="text-[#1F2937] hover:text-[#F97316] transition-colors"
-                    onClick={closeMenu}
-                  >
-                    Profile
-                  </Link>
+                  {user.role !== 'admin' && (
+                    <Link 
+                      to="/profile" 
+                      className="text-[#1F2937] hover:text-[#F97316] transition-colors"
+                      onClick={closeMenu}
+                    >
+                      Profile
+                    </Link>
+                  )}
                   <span className="text-sm text-gray-600">
-                    Hello, {user.username}
+                    {user.role === 'admin' ? 'Admin' : `Hello, ${user.username}`}
                   </span>
                   <button
                     onClick={handleLogout}

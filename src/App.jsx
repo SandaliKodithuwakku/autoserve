@@ -1,4 +1,4 @@
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import ProtectedRoute from './components/ProtectedRoute';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
@@ -28,9 +28,15 @@ import AdminServices from './pages/admin/Services';
 import AdminBookingDetails from './pages/admin/BookingDetails';
 
 function App() {
+  const location = useLocation();
+  const isAdminRoute = location.pathname.startsWith('/admin');
+  const isAuthRoute = ['/login', '/register', '/forgot-password'].includes(location.pathname) || 
+                      location.pathname.startsWith('/reset-password');
+  const hideNavbarFooter = isAdminRoute || isAuthRoute;
+
   return (
     <div className="min-h-screen flex flex-col">
-      <Navbar />
+      {!hideNavbarFooter && <Navbar />}
       <main className="flex-grow">
           <Routes>
             {/* Public routes */}
@@ -109,7 +115,7 @@ function App() {
             <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
-        <Footer />
+        {!hideNavbarFooter && <Footer />}
     </div>
   );
 }

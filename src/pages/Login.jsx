@@ -38,7 +38,13 @@ function Login() {
     try {
       const response = await loginUser(formData.email, formData.password);
       login(response.token, response.user);
-      navigate('/');
+      
+      // Redirect based on user role
+      if (response.user.role === 'admin') {
+        navigate('/admin/dashboard');
+      } else {
+        navigate('/');
+      }
     } catch (err) {
       const errorMsg = err.message || err.error || 'Login failed. Please check your credentials.';
       setError(errorMsg);
