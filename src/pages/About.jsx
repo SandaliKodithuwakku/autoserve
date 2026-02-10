@@ -7,7 +7,7 @@ function About() {
     <div className="min-h-screen">
       {/* Hero Section */}
       <div 
-        className="relative h-[400px] bg-cover bg-center flex items-center justify-center"
+        className="relative h-[300px] bg-cover bg-center flex items-center justify-center"
         style={{ 
           backgroundImage: `url('${getCloudinaryUrl('v1770741349/About_umc7yl.png')}')`,
           backgroundPosition: 'center'
