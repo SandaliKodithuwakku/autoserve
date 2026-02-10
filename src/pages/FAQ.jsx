@@ -151,20 +151,19 @@ function FAQ() {
         }}
       >
         <div className="absolute inset-0 bg-black/40"></div>
-        
-        {/* Title and Description */}
-        <div className="relative z-10 text-center px-4 max-w-4xl">
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            Frequently Asked Questions
-          </h1>
-          <p className="text-white text-lg">
-            Find answers to common questions about our vehicle service booking system, services, and policies.
-          </p>
-        </div>
       </div>
 
       {/* Main Content */}
       <div className="max-w-5xl mx-auto px-4 py-12 pb-16">
+        {/* Title and Description */}
+        <div className="text-center mb-8">
+          <h1 className="text-4xl md:text-5xl font-bold text-orange-500 mb-4">
+            Frequently Asked Questions
+          </h1>
+          <p className="text-gray-600 text-lg">
+            Find answers to common questions about our vehicle service booking system, services, and policies.
+          </p>
+        </div>
 
         {/* Search Bar */}
         <div className="bg-white rounded-lg shadow-lg p-4 mb-6">
