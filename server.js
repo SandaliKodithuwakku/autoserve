@@ -8,6 +8,7 @@ const { protect } = require('./middleware/authMiddleware');
 const authRoutes = require('./routes/authRoutes');
 const serviceRoutes = require('./routes/serviceRoutes');
 const bookingRoutes = require('./routes/bookingRoutes');
+const contactRoutes = require('./routes/contactRoutes');
 
 // Load environment variables
 dotenv.config();
@@ -26,6 +27,7 @@ app.use(express.json());
 app.use('/api/auth', authRoutes);
 app.use('/api/services', serviceRoutes);
 app.use('/api/bookings', bookingRoutes);
+app.use('/api/contact', contactRoutes);
 
 // Test route
 app.get('/', (req, res) => {
