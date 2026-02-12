@@ -21,32 +21,6 @@ cd ../frontend
 npm install
 ```
 
-## Environment Setup
-
-Create `.env` in backend folder:
-```env
-PORT=5000
-MONGO_URI=mongodb+srv://autoserve:lOC6WNrbmaw7xoBA@autoserve.iunk1ef.mongodb.net/autoserve?retryWrites=true&w=majority&appName=AutoServe
-JWT_SECRET=your_super_secret_key_here_change_this_in_production
-# Frontend URL
-FRONTEND_URL=http://localhost:5173
-
-# Email Configuration
-EMAIL_HOST=smtp.gmail.com
-EMAIL_PORT=587
-EMAIL_USER=testautoserve@gmail.com
-EMAIL_PASS=qpiucermgmwprwlm
-```
-
-Create `.env` in frontend folder:
-```env
-# Cloudinary Configuration
-VITE_CLOUDINARY_CLOUD_NAME=ds8hmsirb
-
-# API Configuration
-VITE_API_URL=http://localhost:5000/api
-```
-
 ## Running the App
 
 ```bash
