@@ -141,11 +141,6 @@ function Profile() {
           <Eye className="w-3.5 h-3.5" />
           View Details
         </Link>
-        {booking.status === 'Pending' && (
-          <button className="border-2 border-orange-500 text-orange-500 py-1.5 px-3 rounded-lg text-xs font-medium hover:bg-orange-50 transition-colors">
-            Cancel Booking
-          </button>
-        )}
       </div>
     </div>
   );

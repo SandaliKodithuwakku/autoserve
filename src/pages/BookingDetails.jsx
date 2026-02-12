@@ -237,11 +237,6 @@ function BookingDetails() {
         {/* Action Buttons */}
         <div className="bg-white rounded-lg shadow-lg p-6">
           <div className="flex flex-wrap gap-3">
-            {booking.status === 'Pending' && (
-              <button className="flex-1 min-w-[200px] bg-red-500 text-white py-3 px-6 rounded-lg hover:bg-red-600 transition-colors font-semibold">
-                Cancel Booking
-              </button>
-            )}
             {booking.status === 'Completed' && (
               <Link
                 to="/services"
