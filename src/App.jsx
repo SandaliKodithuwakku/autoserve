@@ -20,6 +20,7 @@ import NotFound from './pages/NotFound';
 import Profile from './pages/Profile';
 import BookingForm from './pages/BookingForm';
 import BookingConfirmation from './pages/BookingConfirmation';
+import BookingDetails from './pages/BookingDetails';
 
 // Admin pages
 import AdminDashboard from './pages/admin/Dashboard';
@@ -73,6 +74,14 @@ function App() {
               element={
                 <ProtectedRoute>
                   <BookingConfirmation />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/booking-details/:id"
+              element={
+                <ProtectedRoute>
+                  <BookingDetails />
                 </ProtectedRoute>
               }
             />
