@@ -23,6 +23,12 @@ function BookingForm() {
     preferredTime: ''
   });
 
+  // Check completion status for each step
+  const isStep1Complete = formData.fullName && formData.phoneNumber && formData.email;
+  const isStep2Complete = formData.vehicleNumber && formData.vehicleModel;
+  const isStep3Complete = formData.preferredDate && formData.preferredTime;
+  const isStep4Complete = isStep1Complete && isStep2Complete && isStep3Complete;
+
   useEffect(() => {
     const fetchService = async () => {
       try {
@@ -129,34 +135,56 @@ function BookingForm() {
         <div className="max-w-4xl mx-auto px-4 py-6">
           <div className="flex items-center justify-between">
             <div className="flex items-center flex-1">
-              <div className="flex items-center justify-center w-8 h-8 rounded-full bg-orange-500 text-white text-sm font-semibold">
+              <div className={`flex items-center justify-center w-8 h-8 rounded-full text-sm font-semibold transition-colors ${
+                isStep1Complete ? 'bg-orange-500 text-white' : 'bg-gray-200 text-gray-600'
+              }`}>
                 1
               </div>
-              <span className="ml-2 text-sm font-medium text-gray-700 hidden sm:inline">Personal Info</span>
-              <div className="flex-1 h-1 bg-gray-200 mx-2"></div>
+              <span className={`ml-2 text-sm font-medium hidden sm:inline transition-colors ${
+                isStep1Complete ? 'text-gray-900' : 'text-gray-500'
+              }`}>Personal Info</span>
+              <div className={`flex-1 h-1 mx-2 transition-colors ${
+                isStep1Complete ? 'bg-orange-500' : 'bg-gray-200'
+              }`}></div>
             </div>
             
             <div className="flex items-center flex-1">
-              <div className="flex items-center justify-center w-8 h-8 rounded-full bg-gray-200 text-gray-600 text-sm font-semibold">
+              <div className={`flex items-center justify-center w-8 h-8 rounded-full text-sm font-semibold transition-colors ${
+                isStep2Complete ? 'bg-orange-500 text-white' : 'bg-gray-200 text-gray-600'
+              }`}>
                 2
               </div>
-              <span className="ml-2 text-sm font-medium text-gray-500 hidden sm:inline">Vehicle Info</span>
-              <div className="flex-1 h-1 bg-gray-200 mx-2"></div>
+              <span className={`ml-2 text-sm font-medium hidden sm:inline transition-colors ${
+                isStep2Complete ? 'text-gray-900' : 'text-gray-500'
+              }`}>Vehicle Info</span>
+              <div className={`flex-1 h-1 mx-2 transition-colors ${
+                isStep2Complete ? 'bg-orange-500' : 'bg-gray-200'
+              }`}></div>
             </div>
             
             <div className="flex items-center flex-1">
-              <div className="flex items-center justify-center w-8 h-8 rounded-full bg-gray-200 text-gray-600 text-sm font-semibold">
+              <div className={`flex items-center justify-center w-8 h-8 rounded-full text-sm font-semibold transition-colors ${
+                isStep3Complete ? 'bg-orange-500 text-white' : 'bg-gray-200 text-gray-600'
+              }`}>
                 3
               </div>
-              <span className="ml-2 text-sm font-medium text-gray-500 hidden sm:inline">Schedule</span>
-              <div className="flex-1 h-1 bg-gray-200 mx-2"></div>
+              <span className={`ml-2 text-sm font-medium hidden sm:inline transition-colors ${
+                isStep3Complete ? 'text-gray-900' : 'text-gray-500'
+              }`}>Schedule</span>
+              <div className={`flex-1 h-1 mx-2 transition-colors ${
+                isStep3Complete ? 'bg-orange-500' : 'bg-gray-200'
+              }`}></div>
             </div>
             
             <div className="flex items-center">
-              <div className="flex items-center justify-center w-8 h-8 rounded-full bg-gray-200 text-gray-600 text-sm font-semibold">
+              <div className={`flex items-center justify-center w-8 h-8 rounded-full text-sm font-semibold transition-colors ${
+                isStep4Complete ? 'bg-orange-500 text-white' : 'bg-gray-200 text-gray-600'
+              }`}>
                 4
               </div>
-              <span className="ml-2 text-sm font-medium text-gray-500 hidden sm:inline">Confirm</span>
+              <span className={`ml-2 text-sm font-medium hidden sm:inline transition-colors ${
+                isStep4Complete ? 'text-gray-900' : 'text-gray-500'
+              }`}>Confirm</span>
             </div>
           </div>
         </div>
