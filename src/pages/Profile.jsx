@@ -156,7 +156,7 @@ function Profile() {
               <User className="w-10 h-10 text-orange-500" />
             </div>
             <div>
-              <h1 className="text-2xl md:text-3xl font-bold">{user?.name || 'User'}</h1>
+              <h1 className="text-2xl md:text-3xl font-bold">{user?.username || 'User'}</h1>
               <div className="flex flex-wrap gap-4 mt-2 text-sm text-orange-100">
                 <span className="flex items-center gap-1">
                   <Mail className="w-4 h-4" />
@@ -164,7 +164,7 @@ function Profile() {
                 </span>
                 <span className="flex items-center gap-1">
                   <Phone className="w-4 h-4" />
-                  {user?.contact || 'Contact not available'}
+                  {user?.phone || 'Contact not available'}
                 </span>
               </div>
             </div>

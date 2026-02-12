@@ -57,7 +57,7 @@ function Register() {
 
     try {
       const response = await registerCustomer(
-        formData.email,        // username (using email as username)
+        formData.fullName,     // username (using full name)
         formData.email,        // email
         formData.phone,        // phone
         formData.password      // password
