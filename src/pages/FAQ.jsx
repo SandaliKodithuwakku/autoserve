@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { Search, Calendar, Wrench, CreditCard, User, ChevronDown } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { Search, Calendar, Wrench, CreditCard, User, ChevronDown, Phone } from 'lucide-react';
 import { getCloudinaryUrl } from '../utils/cloudinary';
 
 function FAQ() {
@@ -256,6 +257,25 @@ function FAQ() {
             </button>
           </div>
         )}
+      </div>
+
+      {/* Still Have Questions Section */}
+      <div className="bg-orange-500 py-12">
+        <div className="max-w-3xl mx-auto px-4 text-center">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+            Still Have Questions ?
+          </h2>
+          <p className="text-white text-lg mb-8">
+            Can't find the answer you're looking for? Our friendly team is here to help you.
+          </p>
+          <Link
+            to="/contact"
+            className="inline-flex items-center gap-2 px-8 py-3 bg-white text-orange-500 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
+          >
+            <Phone className="w-5 h-5" />
+            Contact Support
+          </Link>
+        </div>
       </div>
     </div>
   );
