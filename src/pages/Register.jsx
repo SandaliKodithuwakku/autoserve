@@ -11,6 +11,7 @@ function Register() {
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
+    phone: '',
     password: '',
     confirmPassword: '',
     agreeToTerms: false
@@ -32,7 +33,7 @@ function Register() {
     setError('');
 
     // Validation
-    if (!formData.fullName || !formData.email || !formData.password) {
+    if (!formData.fullName || !formData.email || !formData.phone || !formData.password) {
       setError('Please fill in all required fields');
       return;
     }
@@ -56,10 +57,10 @@ function Register() {
 
     try {
       const response = await registerCustomer(
-        formData.email,        // Use email as username
-        formData.email,        // Email
-        formData.fullName,     // Phone (using fullName temporarily)
-        formData.password
+        formData.email,        // username (using email as username)
+        formData.email,        // email
+        formData.phone,        // phone
+        formData.password      // password
       );
 
       authRegister(response.token, response.user);
@@ -125,6 +126,17 @@ function Register() {
               name="email"
               placeholder="Email Address"
               value={formData.email}
+              onChange={handleChange}
+              className="w-full px-4 py-3 bg-white border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#F97316] focus:border-transparent text-gray-700 placeholder-gray-400 transition-colors"
+              required
+            />
+
+            {/* Phone Number */}
+            <input
+              type="tel"
+              name="phone"
+              placeholder="Phone Number"
+              value={formData.phone}
               onChange={handleChange}
               className="w-full px-4 py-3 bg-white border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#F97316] focus:border-transparent text-gray-700 placeholder-gray-400 transition-colors"
               required
