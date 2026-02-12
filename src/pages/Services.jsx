@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { getAllServices } from '../api/serviceService';
+import { getCloudinaryUrl } from '../utils/cloudinary';
 
 function Services() {
   const [services, setServices] = useState([]);
@@ -27,20 +28,29 @@ function Services() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Hero Section */}
-      <div className="bg-gradient-to-r from-orange-500 to-orange-600 text-white py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">
-            Professional Vehicle Services
-          </h1>
-          <p className="text-xl md:text-2xl text-orange-100 max-w-3xl mx-auto">
-            Expert care for your vehicle with quality service guaranteed
-          </p>
-        </div>
+      {/* Hero Image Section */}
+      <div 
+        className="relative h-[300px] bg-cover bg-center flex items-center justify-center"
+        style={{ 
+          backgroundImage: `url('${getCloudinaryUrl('v1770886807/services_hero_qd4vww.jpg')}')`,
+          backgroundPosition: 'center 40%'
+        }}
+      >
+        <div className="absolute inset-0 bg-black/30"></div>
+      </div>
+
+      {/* Title and Description Section */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 text-center">
+        <h1 className="text-4xl md:text-5xl font-bold text-orange-500 mb-6">
+          Professional Vehicle Services
+        </h1>
+        <p className="text-gray-700 text-lg md:text-xl max-w-3xl mx-auto mb-12">
+          Expert care for your vehicle with quality service guaranteed
+        </p>
       </div>
 
       {/* Services Grid */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
         {loading ? (
           <div className="text-center py-20">
             <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-orange-500"></div>
