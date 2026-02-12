@@ -28,9 +28,9 @@ function Dashboard() {
   // Statistics
   const stats = {
     totalBookings: bookings.length,
-    pendingApprovals: bookings.filter(b => b.status === 'pending').length,
-    completedServices: bookings.filter(b => b.status === 'completed').length,
-    rejected: bookings.filter(b => b.status === 'rejected').length
+    pendingApprovals: bookings.filter(b => b.status === 'Pending').length,
+    completedServices: bookings.filter(b => b.status === 'Completed').length,
+    rejected: bookings.filter(b => b.status === 'Cancelled').length
   };
 
   useEffect(() => {
@@ -44,12 +44,21 @@ function Dashboard() {
         getAllBookings(),
         getAllServices()
       ]);
+      
+      console.log('Bookings API Response:', bookingsData);
+      console.log('Services API Response:', servicesData);
+      
       setBookings(bookingsData.bookings || bookingsData);
       setServices(servicesData.services || servicesData);
+      
+      console.log('Bookings State:', bookingsData.bookings || bookingsData);
+      console.log('Services State:', servicesData.services || servicesData);
+      
       setError(null);
     } catch (err) {
       setError(err.message || 'Failed to load dashboard data');
       console.error('Error fetching data:', err);
+      console.error('Error details:', err.response);
     } finally {
       setLoading(false);
     }
@@ -132,13 +141,15 @@ function Dashboard() {
 
   const filteredBookings = filterStatus === 'all' 
     ? bookings 
-    : bookings.filter(b => b.status === filterStatus);
+    : bookings.filter(b => b.status.toLowerCase() === filterStatus.toLowerCase());
 
   const getStatusColor = (status) => {
-    switch (status) {
+    const normalizedStatus = status?.toLowerCase();
+    switch (normalizedStatus) {
       case 'pending': return 'bg-yellow-100 text-yellow-800';
       case 'approved': return 'bg-green-100 text-green-800';
       case 'completed': return 'bg-blue-100 text-blue-800';
+      case 'cancelled': 
       case 'rejected': return 'bg-red-100 text-red-800';
       default: return 'bg-gray-100 text-gray-800';
     }
@@ -203,7 +214,7 @@ function Dashboard() {
             <div className="text-3xl font-bold text-gray-900">{stats.completedServices}</div>
           </div>
           <div className="bg-white rounded-lg shadow-lg p-6">
-            <div className="text-sm text-gray-600 mb-2">Rejected</div>
+            <div className="text-sm text-gray-600 mb-2">Cancelled</div>
             <div className="text-3xl font-bold text-gray-900">{stats.rejected}</div>
           </div>
         </div>
@@ -269,10 +280,10 @@ function Dashboard() {
                       Completed
                     </button>
                     <button
-                      onClick={() => setFilterStatus('rejected')}
-                      className={`px-4 py-2 rounded ${filterStatus === 'rejected' ? 'bg-orange-500 text-white' : 'bg-gray-200 text-gray-700'}`}
+                      onClick={() => setFilterStatus('cancelled')}
+                      className={`px-4 py-2 rounded ${filterStatus === 'cancelled' ? 'bg-orange-500 text-white' : 'bg-gray-200 text-gray-700'}`}
                     >
-                      Rejected
+                      Cancelled
                     </button>
                   </div>
                 </div>
@@ -301,17 +312,17 @@ function Dashboard() {
                         filteredBookings.map((booking) => (
                           <tr key={booking._id} className="hover:bg-gray-50">
                             <td className="px-4 py-3 text-sm text-gray-900">
-                              {booking.customer?.fullName || booking.customer?.username || 'N/A'}
+                              {booking.customerName || booking.customer?.fullName || booking.customer?.username || 'N/A'}
                             </td>
                             <td className="px-4 py-3 text-sm text-gray-900">{booking.vehicleNumber || 'N/A'}</td>
-                            <td className="px-4 py-3 text-sm text-gray-900">{booking.vehicleType || 'N/A'}</td>
+                            <td className="px-4 py-3 text-sm text-gray-900">{booking.vehicleModel || booking.vehicleType || 'N/A'}</td>
                             <td className="px-4 py-3 text-sm text-gray-900">
-                              {booking.service?.name || 'N/A'}
+                              {booking.serviceType?.name || booking.service?.name || 'N/A'}
                             </td>
                             <td className="px-4 py-3 text-sm text-gray-900">
-                              {booking.preferredDate ? new Date(booking.preferredDate).toLocaleDateString() : 'N/A'}
+                              {booking.date ? new Date(booking.date).toLocaleDateString() : booking.preferredDate ? new Date(booking.preferredDate).toLocaleDateString() : 'N/A'}
                               {' '}
-                              {booking.preferredTime || ''}
+                              {booking.time || booking.preferredTime || ''}
                             </td>
                             <td className="px-4 py-3">
                               <span className={`px-3 py-1 rounded-full text-xs font-semibold ${getStatusColor(booking.status)}`}>
@@ -324,10 +335,10 @@ function Dashboard() {
                                 onChange={(e) => handleStatusUpdate(booking._id, e.target.value)}
                                 className="text-sm border border-gray-300 rounded px-2 py-1 mr-2"
                               >
-                                <option value="pending">Pending</option>
-                                <option value="approved">Approved</option>
-                                <option value="completed">Completed</option>
-                                <option value="rejected">Rejected</option>
+                                <option value="Pending">Pending</option>
+                                <option value="Approved">Approved</option>
+                                <option value="Completed">Completed</option>
+                                <option value="Cancelled">Cancelled</option>
                               </select>
                               <button
                                 onClick={() => handleDeleteBooking(booking._id)}
